@@ -33,6 +33,12 @@ public class Campus {
         }
     }
 
+    public void addStudent(Student student) {
+        if (student != null ) {
+            this.students.add(student);
+        }
+    }
+
     public void addCourse (Course course) {
         if (course != null) {
             this.courses.add(course);
@@ -70,4 +76,97 @@ public class Campus {
         }
         return foundProfessor;
     }
+
+
+    public Student searchStudent(String ID) {
+        int i = 0;
+        Student foundStudent = null;
+        while (i < this.students.size() && foundStudent == null) {
+            if (this.students.get(i).getID().equals(ID)) {
+                foundStudent = this.students.get(i);
+            }
+            i++;
+        }
+        return foundStudent;
+    }
+
+    public Course searchCourse(String code) {
+        int i = 0;
+        Course foundCourse = null;
+        while (i < this.courses.size() && foundCourse == null) {
+            if (this.courses.get(i).getCode().equals(code)) {
+                foundCourse = this.courses.get(i);
+            }
+            i++;
+        }
+        return foundCourse;
+    }
+
+    public Branch searchBranch(String code) {
+        int i = 0;
+        Branch foundBranch = null;
+        while (i < this.branches.size() && foundBranch == null) {
+            if (this.branches.get(i).getCode().equals(code)) {
+                foundBranch = this.branches.get(i);
+            }
+            i++;
+        }
+        return foundBranch;
+    }
+
+    public boolean removeDegreeProgram(String code) {
+        boolean wasRemoved = false;
+        DegreeProgram foundDegreeProgram = this.searchDegreeProgram(code);
+        if (foundDegreeProgram != null) {
+            this.degreePrograms.remove(foundDegreeProgram);
+            wasRemoved = true;
+        }
+        return wasRemoved;
+    }
+
+    public boolean removeProfessor (String ID) {
+        boolean wasRemoved = false;
+        Professor foundProfessor = this.searchProfessor(ID);
+        if (foundProfessor != null) {
+            this.professors.remove(foundProfessor);
+            wasRemoved = true;
+        }
+        return wasRemoved;
+
+    }
+
+    public boolean removeStudent(String ID) {
+        boolean wasRemoved = false;
+        Student foundStudent = this.searchStudent(ID);
+        if (foundStudent != null) {
+            this.students.remove(ID);
+            wasRemoved = true;
+        }
+        return wasRemoved;
+    }
+
+    public boolean removeCourse(String code) {
+        boolean wasRemoved = false;
+        Course foundCourse = this.searchCourse(code);
+        if (foundCourse != null) {
+            this.courses.remove(foundCourse);
+            wasRemoved = true;
+        }
+        return wasRemoved;
+    }
+
+    public boolean removeBranch(String code) {
+        boolean wasRemoved = false;
+        Branch foundBranch = this.searchBranch(code);
+        if (foundBranch != null) {
+            this.courses.remove(foundBranch);
+            wasRemoved = true;
+        }
+        return wasRemoved;
+    }
+//    degreePrograms = new ArrayList<>();
+//    professors = new ArrayList<>();
+//    students = new ArrayList<>();
+//    courses = new ArrayList<>();
+//    branches = new ArrayList<>();
 }
