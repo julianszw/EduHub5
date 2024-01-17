@@ -23,38 +23,51 @@ public class Campus {
         branches = new ArrayList<>();
     }
 
+    public ArrayList<DegreeProgram> getDegreePrograms() {
+        return this.degreePrograms;
+    }
+    public ArrayList<Professor> getProfessors() {
+        return this.professors;
+    }
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+    public ArrayList<Branch> getBranches() {
+        return branches;
+    }
+
     public void addDegreeProgram(DegreeProgram degreeProgram) {
         if (ObjectValidator.validateIsNotNull(degreeProgram)) {
             this.degreePrograms.add(degreeProgram);
         }
     }
-
     public void addProfessor(Professor professor) {
         if (professor != null) {
             this.professors.add(professor);
         }
     }
-
     public void addStudent(Student student) {
-        if (student != null ) {
+        if (student != null) {
             this.students.add(student);
         }
     }
-
-    public void addCourse (Course course) {
+    public void addCourse(Course course) {
         if (course != null) {
             this.courses.add(course);
         }
     }
-
-    public void addBranch (Branch branch) {
+    public void addBranch(Branch branch) {
         if (branch != null) {
             this.branches.add(branch);
         }
     }
 
-    //TODO probar con for-each y luego con Streams
     public DegreeProgram searchDegreeProgram(String searchedProgramCode) {
+        //TODO probar con for-each y luego con Streams
+
         DegreeProgram foundDegreeProgram = null;
         int i = 0;
         while (i < this.degreePrograms.size() && foundDegreeProgram == null) {
@@ -65,8 +78,6 @@ public class Campus {
         }
         return foundDegreeProgram;
     }
-
-
     public Professor searchProfessor(String ID) {
         int i = 0;
         Professor foundProfessor = null;
@@ -78,8 +89,6 @@ public class Campus {
         }
         return foundProfessor;
     }
-
-
     public Student searchStudent(String ID) {
         int i = 0;
         Student foundStudent = null;
@@ -91,7 +100,6 @@ public class Campus {
         }
         return foundStudent;
     }
-
     public Course searchCourse(String code) {
         int i = 0;
         Course foundCourse = null;
@@ -103,7 +111,6 @@ public class Campus {
         }
         return foundCourse;
     }
-
     public Branch searchBranch(String code) {
         int i = 0;
         Branch foundBranch = null;
@@ -125,8 +132,7 @@ public class Campus {
         }
         return wasRemoved;
     }
-
-    public boolean removeProfessor (String ID) {
+    public boolean removeProfessor(String ID) {
         boolean wasRemoved = false;
         Professor foundProfessor = this.searchProfessor(ID);
         if (foundProfessor != null) {
@@ -136,7 +142,6 @@ public class Campus {
         return wasRemoved;
 
     }
-
     public boolean removeStudent(String ID) {
         boolean wasRemoved = false;
         Student foundStudent = this.searchStudent(ID);
@@ -146,7 +151,6 @@ public class Campus {
         }
         return wasRemoved;
     }
-
     public boolean removeCourse(String code) {
         boolean wasRemoved = false;
         Course foundCourse = this.searchCourse(code);
@@ -156,7 +160,6 @@ public class Campus {
         }
         return wasRemoved;
     }
-
     public boolean removeBranch(String code) {
         boolean wasRemoved = false;
         Branch foundBranch = this.searchBranch(code);
@@ -167,11 +170,4 @@ public class Campus {
         return wasRemoved;
     }
 
-    public ArrayList<DegreeProgram> getDegreePrograms() {
-        return this.degreePrograms;
-    }
-
-    public ArrayList<Professor> getProfessors() {
-        return this.professors;
-    }
 }
