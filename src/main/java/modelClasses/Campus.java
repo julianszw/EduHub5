@@ -1,5 +1,7 @@
 package modelClasses;
 
+import auxiliarClasses.ObjectValidator;
+
 import java.util.ArrayList;
 
 public class Campus {
@@ -22,7 +24,7 @@ public class Campus {
     }
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
-        if (degreeProgram != null) {
+        if (ObjectValidator.validateIsNotNull(degreeProgram)) {
             this.degreePrograms.add(degreeProgram);
         }
     }
@@ -164,9 +166,12 @@ public class Campus {
         }
         return wasRemoved;
     }
-//    degreePrograms = new ArrayList<>();
-//    professors = new ArrayList<>();
-//    students = new ArrayList<>();
-//    courses = new ArrayList<>();
-//    branches = new ArrayList<>();
+
+    public ArrayList<DegreeProgram> getDegreePrograms() {
+        return this.degreePrograms;
+    }
+
+    public ArrayList<Professor> getProfessors() {
+        return this.professors;
+    }
 }

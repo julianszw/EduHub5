@@ -1,0 +1,7 @@
+package modelClasses;
+
+public enum TestType {
+    WRITTEN,
+    ORAL;
+    // podría ser escrito grupal, oral grupal, lo mismo individual, multiple choice escrito
+}
