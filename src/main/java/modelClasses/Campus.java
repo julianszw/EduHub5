@@ -40,61 +40,37 @@ public class Campus {
     }
 
     public DegreeProgram searchDegreeProgram(String searchedProgramCode) {
-        //TODO probar con for-each y luego con Streams
-
-        DegreeProgram foundDegreeProgram = null;
-        int i = 0;
-        while (i < this.degreePrograms.size() && foundDegreeProgram == null) {
-            if (this.degreePrograms.get(i).getProgramCode().equals(searchedProgramCode)) {
-                foundDegreeProgram = this.degreePrograms.get(i);
-            }
-            i++;
-        }
-        return foundDegreeProgram;
+        return degreePrograms.stream()
+                .filter(program -> program.getProgramCode().equals(searchedProgramCode))
+                .findFirst()
+                .orElse(null);
     }
     public Professor searchProfessor(String ID) {
-        int i = 0;
-        Professor foundProfessor = null;
-        while (i < this.professors.size() && foundProfessor == null) {
-            if (this.professors.get(i).getID().equals(ID)) {
-                foundProfessor = this.professors.get(i);
-            }
-            i++;
-        }
-        return foundProfessor;
+        return professors.stream()
+                .filter(professor -> professor.getID().equals(ID))
+                .findFirst()
+                .orElse(null);
     }
+
     public Student searchStudent(String ID) {
-        int i = 0;
-        Student foundStudent = null;
-        while (i < this.students.size() && foundStudent == null) {
-            if (this.students.get(i).getID().equals(ID)) {
-                foundStudent = this.students.get(i);
-            }
-            i++;
-        }
-        return foundStudent;
+        return students.stream()
+                .filter(student -> student.getID().equals(ID))
+                .findFirst()
+                .orElse(null);
     }
+
     public Course searchCourse(String code) {
-        int i = 0;
-        Course foundCourse = null;
-        while (i < this.courses.size() && foundCourse == null) {
-            if (this.courses.get(i).getCode().equals(code)) {
-                foundCourse = this.courses.get(i);
-            }
-            i++;
-        }
-        return foundCourse;
+        return courses.stream()
+                .filter(course -> course.getCode().equals(code))
+                .findFirst()
+                .orElse(null);
     }
+
     public Branch searchBranch(String code) {
-        int i = 0;
-        Branch foundBranch = null;
-        while (i < this.branches.size() && foundBranch == null) {
-            if (this.branches.get(i).getCode().equals(code)) {
-                foundBranch = this.branches.get(i);
-            }
-            i++;
-        }
-        return foundBranch;
+        return branches.stream()
+                .filter(branch -> branch.getCode().equals(code))
+                .findFirst()
+                .orElse(null);
     }
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
@@ -102,72 +78,49 @@ public class Campus {
             this.degreePrograms.add(degreeProgram);
         }
     }
+
     public void addProfessor(Professor professor) {
-        if (professor != null) {
-            this.professors.add(professor);
+        if (ObjectValidator.isNotNull(professor)) {
+            professors.add(professor);
         }
     }
+
     public void addStudent(Student student) {
-        if (student != null) {
-            this.students.add(student);
+        if (ObjectValidator.isNotNull(student)) {
+            students.add(student);
         }
     }
+
     public void addCourse(Course course) {
-        if (course != null) {
-            this.courses.add(course);
+        if (ObjectValidator.isNotNull(course)) {
+            courses.add(course);
         }
     }
+
     public void addBranch(Branch branch) {
-        if (branch != null) {
-            this.branches.add(branch);
+        if (ObjectValidator.isNotNull(branch)) {
+            branches.add(branch);
         }
     }
 
     public boolean removeDegreeProgram(String code) {
-        boolean wasRemoved = false;
-        DegreeProgram foundDegreeProgram = this.searchDegreeProgram(code);
-        if (foundDegreeProgram != null) {
-            this.degreePrograms.remove(foundDegreeProgram);
-            wasRemoved = true;
-        }
-        return wasRemoved;
+        return this.degreePrograms.removeIf(program -> program.getProgramCode().equals(code));
     }
-    public boolean removeProfessor(String ID) {
-        boolean wasRemoved = false;
-        Professor foundProfessor = this.searchProfessor(ID);
-        if (foundProfessor != null) {
-            this.professors.remove(foundProfessor);
-            wasRemoved = true;
-        }
-        return wasRemoved;
 
+    public boolean removeProfessor(String ID) {
+        return professors.removeIf(professor -> professor.getID().equals(ID));
     }
+
     public boolean removeStudent(String ID) {
-        boolean wasRemoved = false;
-        Student foundStudent = this.searchStudent(ID);
-        if (foundStudent != null) {
-            this.students.remove(ID);
-            wasRemoved = true;
-        }
-        return wasRemoved;
+        return students.removeIf(student -> student.getID().equals(ID));
     }
+
     public boolean removeCourse(String code) {
-        boolean wasRemoved = false;
-        Course foundCourse = this.searchCourse(code);
-        if (foundCourse != null) {
-            this.courses.remove(foundCourse);
-            wasRemoved = true;
-        }
-        return wasRemoved;
+        return courses.removeIf(course -> course.getCode().equals(code));
     }
+
     public boolean removeBranch(String code) {
-        boolean wasRemoved = false;
-        Branch foundBranch = this.searchBranch(code);
-        if (foundBranch != null) {
-            this.courses.remove(foundBranch);
-            wasRemoved = true;
-        }
-        return wasRemoved;
+        return branches.removeIf(branch -> branch.getCode().equals(code));
     }
 
 }

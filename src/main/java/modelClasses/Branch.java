@@ -3,6 +3,10 @@ package modelClasses;
 import java.util.ArrayList;
 
 import auxiliarClasses.ObjectValidator;
+import auxiliarClasses.TextValidator;
+import org.w3c.dom.Text;
+
+import javax.xml.validation.Validator;
 
 public class Branch {
     private String name;
@@ -13,29 +17,45 @@ public class Branch {
     public Branch(String name, String code) {
         setName(name);
         setCode(code);
+        //ListValidator.initialize(availablePrograms);
         availablePrograms = new ArrayList<>();
     }
 
+    //Setters
     public void setName(String name) {
-        this.name = name;
+        if (TextValidator.isValidName(name)) {
+            this.name = name;
+        }
     }
+
     public void setCode(String code) {
-        this.code = code;
+        if (TextValidator.isValidBrancheCode(code)) {
+            this.code = code;
+        }
     }
+
     public void setBranchDirector(Employee branchDirector) {
+        if (ObjectValidator.isNotNull(branchDirector))
         this.branchDirector = branchDirector;
     }
 
+
+    //Getters
     public String getName() {
         return name;
     }
+
     public String getCode() {
         return code;
     }
+
     public Employee getBranchDirector() {
         return branchDirector;
     }
 
+
+
+    //Available degree programs manipulations
     public DegreeProgram searchProgram(String programCode) {
         DegreeProgram programFound = null;
         int i = 0;
@@ -47,13 +67,13 @@ public class Branch {
         }
         return programFound;
     }
+
     public void addProgram(DegreeProgram program) {
-        if (ObjectValidator.isNotNull(program)) {
-            if (!this.availablePrograms.contains(program)) {
-                this.availablePrograms.add(program);
-            }
+        if (program != null && !this.availablePrograms.contains(program)) {
+            this.availablePrograms.add(program);
         }
     }
+
     public boolean removeProgram(String code) {
         return this.availablePrograms.remove(this.searchProgram(code));
     }
