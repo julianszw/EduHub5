@@ -1,7 +1,7 @@
 package auxiliarClasses;
 
 public class ObjectValidator {
-	public static boolean validateIsNotNull(Object object) {
+	public static boolean isNotNull(Object object) {
 		return object != null;
 	}
 }

@@ -1,47 +1,43 @@
 package modelClasses;
 
+import auxiliarClasses.TextValidator;
+
 import java.util.ArrayList;
 
 public class Course {
     private String name;
     private String code;
-    private ArrayList<Course> requiredCourses;
     private Professor professor;
+    private ArrayList<Course> requiredCourses;
 
     public Course(String name, String code) {
         setName(name);
         setCode(code);
     }
 
-    public Course(String name) {
-        this(name, null);
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+    public void setCode(String code) {
+        if (TextValidator.validCourseCode(code) && code != null) {
+            this.code = code;
+        }
     }
 
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Course> getRequiredCourses() {
-        return requiredCourses;
-    }
-
     public Professor getProfessor() {
         return professor;
     }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public ArrayList<Course> getRequiredCourses() {
+        return requiredCourses;
     }
 }

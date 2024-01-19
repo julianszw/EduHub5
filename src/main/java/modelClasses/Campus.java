@@ -39,32 +39,6 @@ public class Campus {
         return branches;
     }
 
-    public void addDegreeProgram(DegreeProgram degreeProgram) {
-        if (ObjectValidator.validateIsNotNull(degreeProgram)) {
-            this.degreePrograms.add(degreeProgram);
-        }
-    }
-    public void addProfessor(Professor professor) {
-        if (professor != null) {
-            this.professors.add(professor);
-        }
-    }
-    public void addStudent(Student student) {
-        if (student != null) {
-            this.students.add(student);
-        }
-    }
-    public void addCourse(Course course) {
-        if (course != null) {
-            this.courses.add(course);
-        }
-    }
-    public void addBranch(Branch branch) {
-        if (branch != null) {
-            this.branches.add(branch);
-        }
-    }
-
     public DegreeProgram searchDegreeProgram(String searchedProgramCode) {
         //TODO probar con for-each y luego con Streams
 
@@ -121,6 +95,32 @@ public class Campus {
             i++;
         }
         return foundBranch;
+    }
+
+    public void addDegreeProgram(DegreeProgram degreeProgram) {
+        if (ObjectValidator.isNotNull(degreeProgram)) {
+            this.degreePrograms.add(degreeProgram);
+        }
+    }
+    public void addProfessor(Professor professor) {
+        if (professor != null) {
+            this.professors.add(professor);
+        }
+    }
+    public void addStudent(Student student) {
+        if (student != null) {
+            this.students.add(student);
+        }
+    }
+    public void addCourse(Course course) {
+        if (course != null) {
+            this.courses.add(course);
+        }
+    }
+    public void addBranch(Branch branch) {
+        if (branch != null) {
+            this.branches.add(branch);
+        }
     }
 
     public boolean removeDegreeProgram(String code) {
