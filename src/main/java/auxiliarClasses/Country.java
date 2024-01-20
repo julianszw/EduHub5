@@ -204,7 +204,7 @@ public enum Country{
     VIETNAM("Vietnam"),
     YEMEN("Yemen"),
     ZAMBIA("Zambia"),
-    ZIMBABWE("Zimbabwe"),
+    ZIMBABWE("Zimbabwe");
 
     private final String name;
     private final String regex;
@@ -223,7 +223,8 @@ public enum Country{
         return name;
     }
 
-    public Pattern getPattern() {
-        return (regex != null) ? Pattern.compile(regex) : null;
+    public String getIDPattern() {
+        //return (regex != null) ? Pattern.compile(regex) : null;
+        return this.regex;
     }
 }

@@ -37,9 +37,8 @@ public class TextValidator {
 		return branchChde != null && branchChde.matches(BRANCH_CODE_REGEX);
 	}
 
-	public static boolean isValidID(String ID) {
-		//TODO
-		return false;
+	public static boolean isValidID(String ID, Country country) {
+		return ID.matches(country.getIDPattern());
 	}
 
 	public static boolean isValidUserEmail(String emailUser) {
