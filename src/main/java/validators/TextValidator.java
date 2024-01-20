@@ -11,6 +11,8 @@ public class TextValidator {
 	private final static String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 	private final static String EMAIL_USER_REGEX = "^[a-zA-Z0-9._%+-]+$";
 	private final static String EMAIL_DOMAIN_REGEX = "^[a-zA-Z0-9.-]+$";
+	private final static String DEGREE_PROGRAM_NAME_REGEX = "^[A-Za-z\\s]{1,45}$";
+	private final static String COURSE_NAME_REGEX = "^[A-Za-z\\s]{1,45}$";
 
 
 	public static boolean isValidName(String name) {
@@ -25,7 +27,7 @@ public class TextValidator {
 		return email != null && email.matches(EMAIL_REGEX);
 	}
 
-	public static boolean isValidProgramCode(String programCode) {
+	public static boolean isValidDegreeProgramCode(String programCode) {
 		return programCode != null && programCode.matches(PROGRAM_CODE_REGEX);
 	}
 
@@ -33,8 +35,8 @@ public class TextValidator {
 		return courseCode != null && courseCode.matches(COURSE_CODE_REGEX);
 	}
 
-	public static boolean isValidBrancheCode(String branchChde) {
-		return branchChde != null && branchChde.matches(BRANCH_CODE_REGEX);
+	public static boolean isValidBranchCode(String branchCode) {
+		return branchCode != null && branchCode.matches(BRANCH_CODE_REGEX);
 	}
 
 	public static boolean isValidID(String ID, Country country) {
@@ -49,4 +51,11 @@ public class TextValidator {
 		return emailDomain.matches(EMAIL_DOMAIN_REGEX);
 	}
 
+	public static boolean isValidDegreeProgramName(String programName) {
+		return programName.matches(DEGREE_PROGRAM_NAME_REGEX);
+	}
+
+	public static boolean isValidCourseName(String courseName) {
+		return courseName.matches(COURSE_NAME_REGEX);
+	}
 }
