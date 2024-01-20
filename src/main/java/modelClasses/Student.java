@@ -1,5 +1,7 @@
 package modelClasses;
 
+import enums.Country;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -8,11 +10,10 @@ public class Student extends Person {
 	private ArrayList califications;
 	private StudentStatus status;
 
-	public Student(String firstName, String lastName, Gender gender, String ID, String email, LocalDate dateOfBirth) {
-		super(firstName, lastName, gender, ID, email, dateOfBirth);
+	public Student(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
+		super(firstName, lastName, nationality, ID, gender, email, birthDate);
 		this.courses = new ArrayList();
 		this.califications = new ArrayList();
 	}
-
 
 }

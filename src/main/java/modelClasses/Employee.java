@@ -1,17 +1,17 @@
 package modelClasses;
 
+import enums.Country;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Employee extends Person{
-	public Employee(String firstName, String lastName, Gender gender, String ID, String email, LocalDate dateOfBirth, String username, String password) {
-		super(firstName, lastName, gender, ID, email, dateOfBirth);
+
+	public Employee(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
+		super(firstName, lastName, nationality, ID, gender, email, birthDate);
 	}
 
-//	public Employee(String firstName, String lastName, Gender gender, String ID, EMail email, LocalDate dateOfBirth,
-//			String username, String password, StudentStatus status) {
-//		super(firstName, lastName, gender, ID, email, dateOfBirth, username, password, status);
-//		// TODO Auto-generated constructor stub
-	}
+}
 
 
 

@@ -22,7 +22,7 @@ public class Course {
         this.professor = professor;
     }
     public void setCode(String code) {
-        if (TextValidator.validCourseCode(code) && code != null) {
+        if (TextValidator.isValidCourseCode(code) && code != null) {
             this.code = code;
         }
     }

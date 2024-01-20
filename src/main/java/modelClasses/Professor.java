@@ -1,15 +1,17 @@
 package modelClasses;
 
+import enums.Country;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Professor extends Person{
 	private LocalDate hireDate;
-	private ArrayList<Course> coursesCanTeach;
+	private ArrayList<Course> enabledCourses;
 
-	public Professor(String firstName, String lastName, Gender gender, String ID, String email, LocalDate dateOfBirth) {
-		super(firstName, lastName, gender, ID, email, dateOfBirth);
-		this.coursesCanTeach = new ArrayList<>();
+	public Professor(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
+		super(firstName, lastName, nationality, ID, gender, email, birthDate);
+		this.enabledCourses = new ArrayList<>();
 	}
 
 	public LocalDate getHireDate() {
@@ -19,5 +21,28 @@ public class Professor extends Person{
 	public void setHireDate(LocalDate hireDate) {
 		this.hireDate = hireDate;
 	}
+
+	public ArrayList<Course> getEnabledCourses() {
+		return this.enabledCourses;
+	}
+
+	public void enableForCourse(Course course) {
+		if (course != null) {
+			this.enabledCourses.add(course);
+		}
+	}
+
+	public boolean disableForCourse(String courseCode) {
+		return this.enabledCourses.remove(this.searchCourse(courseCode));
+	}
+
+	private Course searchCourse(String courseCode) {
+		return enabledCourses.stream()
+				.filter(course -> course.getCode().equals(courseCode))
+				.findFirst()
+				.orElse(null);
+	}
+
+
 
 }

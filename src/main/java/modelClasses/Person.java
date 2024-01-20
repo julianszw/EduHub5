@@ -2,9 +2,11 @@ package modelClasses;
 
 import enums.Country;
 import enums.EMail;
+import validators.DateValidator;
 import validators.TextValidator;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public abstract class Person {
     private String firstName;
@@ -16,14 +18,18 @@ public abstract class Person {
     private LocalDate birthDate;
 
     //Constructors
-    public Person(String firstName, String lastName, String ID, Gender gender, Country nationality, String email, LocalDate dateOfBirth) {
+    public Person(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
+        setNationality(nationality);
         setID(ID);
         setGender(gender);
-        setNationality(nationality);
         setEmail(email);
         setBirthDate(birthDate);
+    }
+
+    public Person(String firstName, String lastName, Country nationality, String ID, Gender gender, LocalDate birthDate) {
+        this(firstName, lastName, nationality, ID, gender, null, birthDate);
     }
 
 
@@ -31,12 +37,16 @@ public abstract class Person {
     public void setFirstName(String firstName) {
         if (TextValidator.isValidName(firstName)) {
             this.firstName = firstName;
+        } else {
+            throw new IllegalArgumentException(firstName + " no es un nombre válido");
         }
     }
 
     public void setLastName(String lastName) {
         if (TextValidator.isValidLastName(lastName)) {
             this.lastName = lastName;
+        } else {
+            throw new IllegalArgumentException(firstName + " no es un apellido válido");
         }
     }
 
@@ -47,6 +57,8 @@ public abstract class Person {
     public void setID(String ID) {
         if (TextValidator.isValidID(ID, this.nationality)) {
             this.ID = ID;
+        } else {
+            throw new IllegalArgumentException("El identificador " + ID + " no cumple con el formato adecuado para el país " + this.nationality.getName());
         }
     }
 
@@ -58,8 +70,12 @@ public abstract class Person {
         this.email = new EMail(email);
     }
 
-    public void setBirthDate(LocalDate dateOfBirth) {
-        this.birthDate = dateOfBirth;
+    public void setBirthDate(LocalDate birthDate) {
+        if (DateValidator.isValidBirthDate(birthDate)) {
+            this.birthDate = birthDate;
+        } else {
+            throw new IllegalArgumentException("La fecha debe ser posterior a " + DateValidator.MIN_BIRTH_DATE);
+        }
     }
 
 

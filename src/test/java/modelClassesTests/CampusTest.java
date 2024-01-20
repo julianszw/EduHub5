@@ -1,5 +1,6 @@
 package modelClassesTests;
 
+import enums.Country;
 import modelClasses.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class CampusTest {
     @Before
     public void setUpCampus() {
         campus = new Campus();
-        lukeSkywalker = new Student("Luke", "Skywalker", Gender.MALE, "55555555", "luke@skywalker.com", LocalDate.of(1900, 12, 16));
+        lukeSkywalker = new Student("Luke", "Skywalker", Country.ALBANIA, "55555555", Gender.MALE, "luke@skywalker.com", LocalDate.of(1900, 12, 16));
     }
 
     @Before
@@ -32,11 +33,12 @@ public class CampusTest {
 
     @Before
     public void setUpProfessors() {
-        hanzoHattori = new Professor("Hattori", "Hanzo", Gender.MALE, "12345678", "hanzo@hattori.com", LocalDate.of(1950, 10, 15));
-        pedroAlmodovar = new Professor("Pedro", "Almodóvar", Gender.MALE, "23456789", "pedro@almodovar.com", LocalDate.of(1960, 5, 25));
-        sofiaCoppola = new Professor("Sofía", "Coppola", Gender.FEMALE, "34567890", "sofia@coppola.com", LocalDate.of(1971, 5, 14));
-        gasparNoe = new Professor("Gaspar", "Noé", Gender.MALE, "45678901", "gaspar@noe.com", LocalDate.of(1963, 12, 27));
-        scarlettJohansson = new Professor("Scarlett", "Johansson", Gender.FEMALE, "56789012", "scarlett@johansson.com", LocalDate.of(1984, 11, 22));
+        hanzoHattori = new Professor("Hattori", "Hanzo", Country.JAPAN, "12345678", Gender.MALE, "hanzo@hattori.com", LocalDate.of(1950, 10, 15));
+        pedroAlmodovar = new Professor("Pedro", "Almodóvar", Country.SPAIN, "23456789", Gender.MALE, "pedro@almodovar.com", LocalDate.of(1960, 5, 25));
+        sofiaCoppola = new Professor("Sofía", "Coppola", Country.USA, "34567890", Gender.FEMALE, "sofia@coppola.com", LocalDate.of(1971, 5, 14));
+        gasparNoe = new Professor("Gaspar", "Noé", Country.FRANCE, "45678901", Gender.MALE, "gaspar@noe.com", LocalDate.of(1963, 12, 27));
+        scarlettJohansson = new Professor("Scarlett", "Johansson", Country.USA, "56789012", Gender.FEMALE, "scarlett@johansson.com", LocalDate.of(1984, 11, 22));
+
     }
 
     @Test
@@ -65,7 +67,7 @@ public class CampusTest {
     @Test
     public void testShouldNotAddNullDegreeProgram() {
         DegreeProgram nullDegreeProgram = null;
-        campus.addDegreeProgram(nullDegreeProgram); //TODO quizá es más ortodoxo agregar null
+        campus.addDegreeProgram(nullDegreeProgram); //TODO quizás es mejor null como parámetro
         assertTrue(!campus.getDegreePrograms().contains(nullDegreeProgram));
         assertEquals(0, campus.getDegreePrograms().size());
     }
