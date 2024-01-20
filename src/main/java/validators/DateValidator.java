@@ -1,4 +1,4 @@
-package auxiliarClasses;
+package validators;
 
 import java.time.LocalDate;
 

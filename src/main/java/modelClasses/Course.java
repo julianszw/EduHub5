@@ -1,6 +1,6 @@
 package modelClasses;
 
-import auxiliarClasses.TextValidator;
+import validators.TextValidator;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package auxiliarClasses;
+package validators;
 
-import java.util.regex.Pattern;
+import enums.Country;
 
 public class TextValidator {
 	private final static String NAME_REGEX = "^[a-zA-Z'\\s]+$"; //TODO ¿Mismo Regex que para lastName?

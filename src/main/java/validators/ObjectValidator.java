@@ -1,6 +1,4 @@
-package auxiliarClasses;
-
-import modelClasses.Person;
+package validators;
 
 public class ObjectValidator {
 	public static boolean isNotNull(Object object) {

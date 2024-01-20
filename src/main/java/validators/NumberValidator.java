@@ -1,4 +1,4 @@
-package auxiliarClasses;
+package validators;
 
 public class NumberValidator {
 

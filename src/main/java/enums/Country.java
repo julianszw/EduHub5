@@ -1,4 +1,4 @@
-package auxiliarClasses;
+package enums;
 
 import java.util.regex.Pattern;
 

@@ -2,11 +2,8 @@ package modelClasses;
 
 import java.util.ArrayList;
 
-import auxiliarClasses.ObjectValidator;
-import auxiliarClasses.TextValidator;
-import org.w3c.dom.Text;
-
-import javax.xml.validation.Validator;
+import validators.ObjectValidator;
+import validators.TextValidator;
 
 public class Branch {
     private String name;

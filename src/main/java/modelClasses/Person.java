@@ -1,8 +1,8 @@
 package modelClasses;
 
-import auxiliarClasses.Country;
-import auxiliarClasses.EMail;
-import auxiliarClasses.TextValidator;
+import enums.Country;
+import enums.EMail;
+import validators.TextValidator;
 
 import java.time.LocalDate;
 

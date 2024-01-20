@@ -1,4 +1,6 @@
-package auxiliarClasses;
+package enums;
+
+import validators.TextValidator;
 
 public class EMail {
     private String user;
