@@ -1,5 +1,7 @@
 package modelClasses;
 
+import enums.ExamType;
+
 public class Exam {
 	private ExamType examTypetype;
 	private TestType testType;

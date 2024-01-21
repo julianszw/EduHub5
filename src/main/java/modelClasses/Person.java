@@ -2,11 +2,11 @@ package modelClasses;
 
 import enums.Country;
 import enums.EMail;
+import enums.Gender;
 import validators.DateValidator;
 import validators.TextValidator;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public abstract class Person {
     private String firstName;

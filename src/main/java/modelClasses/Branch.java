@@ -14,7 +14,7 @@ public class Branch {
     public Branch(String name, String code) {
         setName(name);
         setCode(code);
-        //ListValidator.initialize(availablePrograms);
+        //setBranchDirector
         availablePrograms = new ArrayList<>();
     }
 
@@ -26,14 +26,14 @@ public class Branch {
     }
 
     public void setCode(String code) {
-        if (TextValidator.isValidBrancheCode(code)) {
+        if (TextValidator.isValidBranchCode(code)) {
             this.code = code;
         }
     }
 
     public void setBranchDirector(Employee branchDirector) {
         if (ObjectValidator.isNotNull(branchDirector))
-        this.branchDirector = branchDirector;
+            this.branchDirector = branchDirector;
     }
 
 

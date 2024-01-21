@@ -1,6 +1,7 @@
 package modelClassesTests;
 
 import enums.Country;
+import enums.Gender;
 import modelClasses.*;
 import org.junit.Before;
 import org.junit.Test;

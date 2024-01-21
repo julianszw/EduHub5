@@ -1,4 +1,4 @@
-package modelClasses;
+package enums;
 
 public enum Gender {
 	FEMALE("Female", "F"),

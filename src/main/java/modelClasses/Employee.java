@@ -1,9 +1,9 @@
 package modelClasses;
 
 import enums.Country;
+import enums.Gender;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Employee extends Person{
 
