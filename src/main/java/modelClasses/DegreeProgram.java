@@ -55,4 +55,8 @@ public class DegreeProgram {
 		return programDirector;
 	}
 
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
+
 }
