@@ -18,11 +18,13 @@ public class Course {
     public void setName(String name) {
         this.name = name;
     }
+
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
     public void setCode(String code) {
-        if (TextValidator.isValidCourseCode(code) && code != null) {
+        if (TextValidator.isValidCourseCode(code)) {
             this.code = code;
         }
     }
@@ -30,9 +32,11 @@ public class Course {
     public String getName() {
         return name;
     }
+
     public Professor getProfessor() {
         return professor;
     }
+
     public String getCode() {
         return code;
     }
