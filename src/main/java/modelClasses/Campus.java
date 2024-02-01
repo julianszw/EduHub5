@@ -45,6 +45,7 @@ public class Campus {
                 .findFirst()
                 .orElse(null);
     }
+
     public Professor searchProfessor(String ID) {
         return professors.stream()
                 .filter(professor -> professor.getID().equals(ID))
@@ -123,6 +124,20 @@ public class Campus {
         return branches.removeIf(branch -> branch.getCode().equals(code));
     }
 
-    //
+    public boolean addCourseToDegreeProgram(String courseCode, String programCode) {
+        //TODO crear jerarquía de excepciones
+        Course course = this.searchCourse(courseCode);
+        if (course == null) {
+            throw new IllegalArgumentException("El curso buscado no existe");
+        }
+
+        DegreeProgram degreeProgram = this.searchDegreeProgram(programCode);
+        if (degreeProgram == null) {
+            throw new IllegalArgumentException("La carrera buscada no existe");
+        }
+
+        degreeProgram.addCourse(course);
+        return true;
+    }
 
 }
