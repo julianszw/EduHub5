@@ -14,11 +14,9 @@ public class Branch {
     public Branch(String name, String code) {
         setName(name);
         setCode(code);
-        //setBranchDirector
         availablePrograms = new ArrayList<>();
     }
 
-    //Setters
     public void setName(String name) {
         if (TextValidator.isValidName(name)) {
             this.name = name;
@@ -32,12 +30,11 @@ public class Branch {
     }
 
     public void setBranchDirector(Employee branchDirector) {
-        if (ObjectValidator.isNotNull(branchDirector))
+        if (ObjectValidator.isNotNull(branchDirector)) {
             this.branchDirector = branchDirector;
+        }
     }
 
-
-    //Getters
     public String getName() {
         return name;
     }
@@ -51,18 +48,11 @@ public class Branch {
     }
 
 
-
-    //Available degree programs manipulations
     public DegreeProgram searchProgram(String programCode) {
-        DegreeProgram programFound = null;
-        int i = 0;
-        while (programFound == null && i < this.availablePrograms.size()) {
-            if (this.availablePrograms.get(i).getProgramCode().equals(programCode)) {
-                programFound = this.availablePrograms.get(i);
-            }
-            i++;
-        }
-        return programFound;
+        return this.availablePrograms.stream()
+                .filter(program -> program.getProgramCode().equals(programCode))
+                .findFirst()
+                .orElse(null);
     }
 
     public void addProgram(DegreeProgram program) {
