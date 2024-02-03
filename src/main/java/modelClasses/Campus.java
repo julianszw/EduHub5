@@ -130,13 +130,24 @@ public class Campus {
         if (course == null) {
             throw new IllegalArgumentException("El curso buscado no existe");
         }
-
         DegreeProgram degreeProgram = this.searchDegreeProgram(programCode);
         if (degreeProgram == null) {
             throw new IllegalArgumentException("La carrera buscada no existe");
         }
-
         degreeProgram.addCourse(course);
+        return true;
+    }
+
+    public boolean addDegreeProgramToBranch(String branchCode, String programCode) {
+        Branch branch = this.searchBranch(branchCode);
+        if (branch == null) {
+            throw new IllegalArgumentException("Sucursal no encontrada");
+        }
+        DegreeProgram degreeProgram = this.searchDegreeProgram(programCode);
+        if (degreeProgram == null) {
+            throw new IllegalArgumentException("La carrera buscada no existe");
+        }
+        branch.addProgram(degreeProgram);
         return true;
     }
 
