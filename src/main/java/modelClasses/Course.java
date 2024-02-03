@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class Course {
     private String name;
     private String code;
-    private Professor professor;
     private ArrayList<Course> requiredCourses;
 
     public Course(String name, String code) {
@@ -19,10 +18,6 @@ public class Course {
         this.name = name;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
     public void setCode(String code) {
         if (TextValidator.isValidCourseCode(code)) {
             this.code = code;
@@ -31,10 +26,6 @@ public class Course {
 
     public String getName() {
         return name;
-    }
-
-    public Professor getProfessor() {
-        return professor;
     }
 
     public String getCode() {
