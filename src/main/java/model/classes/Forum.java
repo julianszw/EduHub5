@@ -1,4 +1,4 @@
-package modelClasses;
+package model.classes;
 
 public class Forum {
   //TODO cada materia deberia tener su foro

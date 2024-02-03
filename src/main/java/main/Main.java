@@ -1,6 +1,6 @@
 package main;
 
-import modelClasses.Campus;
+import model.classes.Campus;
 
 public class Main {
     public static void main(String[] args) {

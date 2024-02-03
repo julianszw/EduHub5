@@ -1,7 +1,8 @@
-package modelClassesTests;
+package model.classes.tests;
 
 import enums.Country;
 import enums.Gender;
+import model.classes.*;
 import modelClasses.*;
 import org.junit.Before;
 import org.junit.Test;

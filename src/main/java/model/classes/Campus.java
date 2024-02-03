@@ -1,4 +1,4 @@
-package modelClasses;
+package model.classes;
 
 import validators.ObjectValidator;
 

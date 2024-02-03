@@ -1,4 +1,4 @@
-package modelClasses;
+package model.classes;
 
 public enum TaskType {
 	PRACTICAL_ASSIGNMENT, 

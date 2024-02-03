@@ -1,4 +1,4 @@
-package modelClasses;
+package model.classes;
 
 import enums.Country;
 import enums.Gender;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Professor extends Person{
 	private LocalDate hireDate;
-	private ArrayList<Course> enabledCourses;
+	private ArrayList<Course> enabledCourses; //TODO borrar
 
 	public Professor(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
 		super(firstName, lastName, nationality, ID, gender, email, birthDate);
