@@ -2,6 +2,7 @@ package model.classes;
 
 import enums.Country;
 import enums.Gender;
+import enums.StudentStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -26,4 +26,9 @@ public class Period {
     public void setYear(Year year) {
         this.year = year;
     }
+
+    @Override
+    public String toString() {
+        return semester + " - " + year;
+    }
 }

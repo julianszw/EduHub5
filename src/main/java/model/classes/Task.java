@@ -1,5 +1,7 @@
 package model.classes;
 
+import enums.TaskType;
+
 import java.time.LocalDate;
 
 public class Task {
