@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class DegreeProgram {
 	private String name;
 	private String programCode;
-	private Employee programDirector;
+	private Professor programDirector;
 	private ArrayList<Course> courses; //curriculum
 	private ArrayList<Branch> availableBranches;
+	private ArrayList<Student> enrolledStudents;
 
 	public DegreeProgram(String name, String programCode) {
 		this.initializeLists();
@@ -39,7 +40,7 @@ public class DegreeProgram {
 
 	}
 
-	public void setProgramDirector(Employee programDirector) {
+	public void setProgramDirector(Professor programDirector) {
 		this.programDirector = programDirector;
 	}
 
@@ -51,12 +52,20 @@ public class DegreeProgram {
 		return programCode;
 	}
 
-	public Employee getProgramDirector() {
+	public Professor getProgramDirector() {
 		return programDirector;
 	}
 
 	public void addCourse(Course course) {
 		this.courses.add(course);
+	}
+
+	public void enrollStudent(Student student) {
+		this.enrolledStudents.add(student);
+	}
+
+	public boolean unrollStudent(Student student) {
+		return this.enrolledStudents.remove(student);
 	}
 
 }
