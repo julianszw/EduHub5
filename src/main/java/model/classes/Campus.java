@@ -8,6 +8,7 @@ public class Campus {
     private ArrayList<DegreeProgram> degreePrograms;
     private ArrayList<Professor> professors;
     private ArrayList<Student> students;
+    private ArrayList<Employee> employees;
     private ArrayList<Course> courses;
     private ArrayList<Branch> branches;
 
@@ -19,6 +20,7 @@ public class Campus {
         degreePrograms = new ArrayList<>();
         professors = new ArrayList<>();
         students = new ArrayList<>();
+        employees = new ArrayList<>();
         courses = new ArrayList<>();
         branches = new ArrayList<>();
     }
@@ -60,6 +62,13 @@ public class Campus {
                 .orElse(null);
     }
 
+    public Employee searchEmployee(String ID) {
+        return employees.stream()
+                .filter(employee -> employee.getID().equals(ID))
+                .findFirst()
+                .orElse(null);
+    }
+
     public Course searchCourse(String code) {
         return courses.stream()
                 .filter(course -> course.getCode().equals(code))
@@ -92,6 +101,12 @@ public class Campus {
         }
     }
 
+    public void addEmployee(Employee employee) {
+        if (ObjectValidator.isNotNull(employee)) {
+            employees.add(employee);
+        }
+    }
+
     public void addCourse(Course course) {
         if (ObjectValidator.isNotNull(course)) {
             courses.add(course);
@@ -116,6 +131,10 @@ public class Campus {
         return students.removeIf(student -> student.getID().equals(ID));
     }
 
+    public boolean removeEmployee(String employeeID) {
+        return employees.removeIf(employee -> employee.getID().equals(employeeID));
+    }
+
     public boolean removeCourse(String code) {
         return courses.removeIf(course -> course.getCode().equals(code));
     }
@@ -138,17 +157,51 @@ public class Campus {
         return true;
     }
 
-    public boolean addDegreeProgramToBranch(String branchCode, String programCode) {
+    public boolean addDegreeProgramToBranch(String branchCode, String degreeProgramCode) {
         Branch branch = this.searchBranch(branchCode);
         if (branch == null) {
             throw new IllegalArgumentException("Sucursal no encontrada");
         }
-        DegreeProgram degreeProgram = this.searchDegreeProgram(programCode);
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         if (degreeProgram == null) {
             throw new IllegalArgumentException("La carrera buscada no existe");
         }
         branch.addProgram(degreeProgram);
         return true;
+    }
+
+    public boolean setProgramDirectorToDegreeProgram(String professorID, String degreeProgramCode) {
+        Professor programDirector = this.searchProfessor(professorID);
+        if (programDirector == null) {
+            throw new IllegalArgumentException("Profesor no encontrado");
+        }
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
+        if (degreeProgram == null) {
+            throw new IllegalArgumentException("La carrera buscada no existe");
+        }
+        degreeProgram.setProgramDirector(programDirector);
+        return true;
+    }
+
+    public boolean enrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
+        Student student = this.searchStudent(studentID);
+        if (student == null) {
+            throw new IllegalArgumentException("Estudiante no encontrado");
+        }
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
+        if (degreeProgram == null) {
+            throw new IllegalArgumentException("La carrera buscada no existe");
+        }
+        degreeProgram.enrollStudent(student);
+        return true;
+    }
+
+    public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
+        if (degreeProgram == null) {
+            throw new IllegalArgumentException("La carrera buscada no existe");
+        }
+        return degreeProgram.unrollStudent(this.searchStudent(studentID));
     }
 
 }
