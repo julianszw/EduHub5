@@ -4,7 +4,7 @@ import enums.ExamType;
 import enums.TestType;
 
 public class Exam {
-	private ExamType examTypetype;
+	private ExamType examType;
 	private TestType testType;
 	private String title;
 	private String virtualExam; //setter
@@ -17,11 +17,11 @@ public class Exam {
 	}
 
 	public ExamType getType() {
-		return examTypetype;
+		return examType;
 	}
 
 	public void setType(ExamType type) {
-		this.examTypetype = type;
+		this.examType = type;
 	}
 
 	public String getTitle() {
