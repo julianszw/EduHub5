@@ -3,6 +3,7 @@ package model.classes;
 import validators.ObjectValidator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Campus {
     private ArrayList<DegreeProgram> degreePrograms;
@@ -11,6 +12,7 @@ public class Campus {
     private ArrayList<Employee> employees;
     private ArrayList<Course> courses;
     private ArrayList<Branch> branches;
+    private ArrayList<Enrollment> enrollments;
 
     public Campus() {
         this.initializeLists();
@@ -23,22 +25,7 @@ public class Campus {
         employees = new ArrayList<>();
         courses = new ArrayList<>();
         branches = new ArrayList<>();
-    }
-
-    public ArrayList<DegreeProgram> getDegreePrograms() {
-        return this.degreePrograms;
-    }
-    public ArrayList<Professor> getProfessors() {
-        return this.professors;
-    }
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-    public ArrayList<Course> getCourses() {
-        return courses;
-    }
-    public ArrayList<Branch> getBranches() {
-        return branches;
+        enrollments = new ArrayList<>();
     }
 
     public DegreeProgram searchDegreeProgram(String searchedProgramCode) {
@@ -84,6 +71,7 @@ public class Campus {
     }
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
+        //TODO handlear casos en los que sea nulo o bien preguntar directamente si es null para no hacer pasamanos
         if (ObjectValidator.isNotNull(degreeProgram)) {
             this.degreePrograms.add(degreeProgram);
         }
@@ -144,65 +132,69 @@ public class Campus {
     }
 
     public boolean addCourseToDegreeProgram(String courseCode, String programCode) {
-        //TODO crear jerarquía de excepciones
         Course course = this.searchCourse(courseCode);
-        if (course == null) {
-            throw new IllegalArgumentException("El curso buscado no existe");
-        }
+        ObjectValidator.checkCourseIsNotNull(course);
         DegreeProgram degreeProgram = this.searchDegreeProgram(programCode);
-        if (degreeProgram == null) {
-            throw new IllegalArgumentException("La carrera buscada no existe");
-        }
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         degreeProgram.addCourse(course);
         return true;
     }
 
     public boolean addDegreeProgramToBranch(String branchCode, String degreeProgramCode) {
         Branch branch = this.searchBranch(branchCode);
-        if (branch == null) {
-            throw new IllegalArgumentException("Sucursal no encontrada");
-        }
+        ObjectValidator.checkBranchIsNotNull(branch);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
-        if (degreeProgram == null) {
-            throw new IllegalArgumentException("La carrera buscada no existe");
-        }
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         branch.addProgram(degreeProgram);
         return true;
     }
 
     public boolean setProgramDirectorToDegreeProgram(String professorID, String degreeProgramCode) {
         Professor programDirector = this.searchProfessor(professorID);
-        if (programDirector == null) {
-            throw new IllegalArgumentException("Profesor no encontrado");
-        }
+        ObjectValidator.checkProfessorIsNotNull(programDirector);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
-        if (degreeProgram == null) {
-            throw new IllegalArgumentException("La carrera buscada no existe");
-        }
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         degreeProgram.setProgramDirector(programDirector);
         return true;
     }
 
     public boolean enrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
         Student student = this.searchStudent(studentID);
-        if (student == null) {
-            throw new IllegalArgumentException("Estudiante no encontrado");
-        }
+        ObjectValidator.checkStudentIsNotNull(student);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
-        if (degreeProgram == null) {
-            throw new IllegalArgumentException("La carrera buscada no existe");
-        }
-        degreeProgram.enrollStudent(student);
-        student.enrollInDegreeProgram(degreeProgram); //mmm
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
+        this.enrollments.add(new Enrollment(degreeProgram, student));
         return true;
     }
 
     public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
-        if (degreeProgram == null) {
-            throw new IllegalArgumentException("La carrera buscada no existe");
-        }
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         return degreeProgram.unrollStudent(this.searchStudent(studentID));
+    }
+
+    public ArrayList<Course> getFinishedCoursesOf(String degreeProgramCode, String studentID) {
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
+        Student student = this.searchStudent(studentID);
+        ObjectValidator.checkStudentIsNotNull(student);
+        Enrollment enrollment = this.searchEnrollment(degreeProgram, student);
+        return enrollment.getFinishedCourses();
+    }
+
+    private Enrollment searchEnrollment(DegreeProgram degreeProgram, Student student) {
+        //TODO usar un array
+        return enrollments.stream()
+                .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram)
+                        && enrollment.getStudent().equals(student))
+                .findFirst()
+                .orElse(null);
+    }
+
+
+    public void searchAllStudentsEnrollments(String studentID) {
+        //TODO sobrecargar para poder buscar por número de inscripción
+        //devolver List
     }
 
 }
