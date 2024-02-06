@@ -2,7 +2,7 @@ package model.classes;
 
 import enums.Country;
 import enums.Gender;
-import validators.ObjectValidator;
+import enums.Role;
 
 import java.time.LocalDate;
 
