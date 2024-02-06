@@ -8,14 +8,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Student extends Person {
+	private static int enrollmentNumber;
+	private int enrollmentCode;
+	private StudentStatus status;
 	private ArrayList courses;
 	private ArrayList califications;
-	private StudentStatus status;
+	private ArrayList degreePrograms;
 
 	public Student(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
 		super(firstName, lastName, nationality, ID, gender, email, birthDate);
-		this.courses = new ArrayList();
-		this.califications = new ArrayList();
+		courses = new ArrayList();
+		califications = new ArrayList();
+		degreePrograms = new ArrayList();
 	}
+
+	private void generateEnrollmentCode() {
+		this.enrollmentCode = enrollmentNumber++;
+		//TODO pasarlo a String. Usar el TextValidator para generar un formato pasándole  el enrollmentNumber
+	}
+
+	//TODO considerar clase Enrollment
+	public void enrollInDegreeProgram(DegreeProgram degreeProgram) {
+		this.degreePrograms.add(degreeProgram);
+	}
+
 
 }

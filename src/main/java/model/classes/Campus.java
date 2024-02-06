@@ -193,6 +193,7 @@ public class Campus {
             throw new IllegalArgumentException("La carrera buscada no existe");
         }
         degreeProgram.enrollStudent(student);
+        student.enrollInDegreeProgram(degreeProgram); //mmm
         return true;
     }
 
