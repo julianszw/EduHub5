@@ -1,13 +1,17 @@
-package model.classes;
+package enrollments;
+
+import model.classes.Course;
+import model.classes.DegreeProgram;
+import model.classes.Student;
 
 import java.util.ArrayList;
 
-public class Enrollment {
+public class DegreeProgramEnrollment {
     private Student student;
     private DegreeProgram degreeProgram;
     private ArrayList<Course> finishedCourses; //accredited/ approved
 
-    public Enrollment(DegreeProgram degreeProgram, Student student) {
+    public DegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         this.degreeProgram = degreeProgram;
         this.student = student;
     }
@@ -24,4 +28,6 @@ public class Enrollment {
         //TODO vale la pena que todas las instancias tengan esta lista?
         return finishedCourses;
     }
+
+
 }

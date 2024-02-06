@@ -1,9 +1,9 @@
 package model.classes;
 
+import enrollments.DegreeProgramEnrollment;
 import validators.ObjectValidator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Campus {
     private ArrayList<DegreeProgram> degreePrograms;
@@ -12,7 +12,7 @@ public class Campus {
     private ArrayList<Employee> employees;
     private ArrayList<Course> courses;
     private ArrayList<Branch> branches;
-    private ArrayList<Enrollment> enrollments;
+    private ArrayList<DegreeProgramEnrollment> enrollments;
 
     public Campus() {
         this.initializeLists();
@@ -163,7 +163,7 @@ public class Campus {
         ObjectValidator.checkStudentIsNotNull(student);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
-        this.enrollments.add(new Enrollment(degreeProgram, student));
+        this.enrollments.add(new DegreeProgramEnrollment(degreeProgram, student));
         return true;
     }
 
@@ -178,11 +178,11 @@ public class Campus {
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         Student student = this.searchStudent(studentID);
         ObjectValidator.checkStudentIsNotNull(student);
-        Enrollment enrollment = this.searchEnrollment(degreeProgram, student);
+        DegreeProgramEnrollment enrollment = this.searchEnrollment(degreeProgram, student);
         return enrollment.getFinishedCourses();
     }
 
-    private Enrollment searchEnrollment(DegreeProgram degreeProgram, Student student) {
+    private DegreeProgramEnrollment searchEnrollment(DegreeProgram degreeProgram, Student student) {
         //TODO usar un array
         return enrollments.stream()
                 .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram)

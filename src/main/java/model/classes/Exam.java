@@ -7,7 +7,7 @@ public class Exam {
 	private ExamType examType;
 	private TestType testType;
 	private String title;
-	private String virtualExam; //setter
+	private boolean virtualExam; //setter
 
 	//Lo ideal sería que, al crear una interfaz, pueda ir eligiendo el tip ode examen y eso
 
