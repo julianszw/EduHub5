@@ -1,21 +1,21 @@
 package model.classes;
 
 public enum Role {
-	ADMINISTRADOR("Administrator"), // Administrator
-	BIBLIOTECARIO("Librarian"), // Librarian
-	COORDINADOR_DE_ESTUDIOS("Study Coordinator"), // Study Coordinator
-	CONSEJERO_ACADEMICO("Academic Advisor"), // Academic Advisor
-	DECANO("Dean"), // Dean
-	DIRECTOR_DE_CARRERA("Program Director"), // Program Director
-	DIRECTOR_DE_INVESTIGACION("Director of Research"), // Director of Research
-	INVESTIGADOR("Researcher"), // Researcher
-	JEFE_DE_DEPARTAMENTO("Department Head"), // Department Head
-	PERSONAL_DE_APOYO("Support Staff"), // Support Staff
-	PROFESOR("Professor"), // Professor
+	ADMINISTRADOR("Administrador"), // Administrator
+	BIBLIOTECARIO("Bibliotecario"), // Librarian
+	COORDINADOR_DE_ESTUDIOS("Coordinador de Estudios"), // Study Coordinator
+	CONSEJERO_ACADEMICO("Consejero Académico"), // Academic Advisor
+	DECANO("Decano"), // Dean
+	DIRECTOR_DE_CARRERA("Director de Carrera"), // Program Director
+	DIRECTOR_DE_INVESTIGACION("Director de Investigación"), // Director of Research
+	INVESTIGADOR("Investigador"), // Researcher
+	JEFE_DE_DEPARTAMENTO("Jefe de Departamento"), // Department Head
+	PERSONAL_DE_APOYO("Personal de Apoyo"), // Support Staff
+	PROFESOR("Profesor"), // Professor
 	RECTOR("Rector"), // Rector
-	SECRETARIO_ACADEMICO("Academic Secretary"), // Academic Secretary
+	SECRETARIO_ACADEMICO("Secretario Académico"), // Academic Secretary
 	TUTOR("Tutor"), // Tutor
-	VICERRECTOR("Vice Chancellor"); // Vice Chancellor
+	VICERRECTOR("Vicerrector"); // Vice Chancellor
 
 	private final String descripcion;
 
