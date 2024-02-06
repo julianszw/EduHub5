@@ -2,6 +2,7 @@ package model.classes;
 
 import validators.TextValidator;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DegreeProgram {
@@ -10,7 +11,6 @@ public class DegreeProgram {
 	private Professor programDirector;
 	private ArrayList<Course> courses; //curriculum
 	private ArrayList<Branch> availableBranches;
-	private ArrayList<Student> enrolledStudents;
 
 	public DegreeProgram(String name, String programCode) {
 		this.initializeLists();
@@ -60,12 +60,15 @@ public class DegreeProgram {
 		this.courses.add(course);
 	}
 
-	public void enrollStudent(Student student) {
-		this.enrolledStudents.add(student);
+	public ArrayList<Course> getCurriculum() {
+		return this.courses;
 	}
 
-	public boolean unrollStudent(Student student) {
-		return this.enrolledStudents.remove(student);
+	public Course searchCourse(String courseCode) {
+		return courses.stream()
+				.filter(course -> course.getCode().equals(courseCode))
+				.findFirst()
+				.orElse(null); // Devuelve el curso si se encuentra, de lo contrario devuelve null
 	}
 
 }

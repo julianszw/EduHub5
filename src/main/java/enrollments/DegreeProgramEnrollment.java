@@ -1,15 +1,17 @@
 package enrollments;
 
+import auxiliar.classes.SchoolPeriodGenerator;
 import model.classes.Course;
 import model.classes.DegreeProgram;
+import model.classes.SchoolPeriod;
 import model.classes.Student;
-
+import validators.ObjectValidator;
 import java.util.ArrayList;
 
 public class DegreeProgramEnrollment {
     private Student student;
     private DegreeProgram degreeProgram;
-    private ArrayList<Course> finishedCourses; //accredited/ approved
+    private ArrayList<CourseEnrollment> courseEnrollments;
 
     public DegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         this.degreeProgram = degreeProgram;
@@ -24,10 +26,17 @@ public class DegreeProgramEnrollment {
         return degreeProgram;
     }
 
-    public ArrayList<Course> getFinishedCourses() {
-        //TODO vale la pena que todas las instancias tengan esta lista?
-        return finishedCourses;
+    public void enrollStudentInCourse(String courseCode) {
+        Course course = degreeProgram.searchCourse(courseCode);
+        ObjectValidator.checkCourseIsNotNull(course);
+        this.courseEnrollments.add(new CourseEnrollment());
     }
+
+    private SchoolPeriod nextPeriod() {
+        return SchoolPeriodGenerator.generateSchoolPeriod();
+    }
+
+
 
 
 }

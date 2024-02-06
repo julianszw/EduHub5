@@ -2,11 +2,11 @@ package model.classes;
 
 import java.time.Year;
 
-public class Period {
+public class SchoolPeriod {
     private int semester;
     private Year year;
 
-    public Period(int semester, Year year) {
+    public SchoolPeriod(int semester, Year year) {
         this.semester = semester;
         this.year = year;
     }

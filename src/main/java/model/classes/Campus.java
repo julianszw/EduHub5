@@ -71,7 +71,8 @@ public class Campus {
     }
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
-        //TODO handlear casos en los que sea nulo o bien preguntar directamente si es null para no hacer pasamanos
+        //TODO handlear casos en los que sea nulo
+        // o bien preguntar directamente si es null para no hacer pasamanos
         if (ObjectValidator.isNotNull(degreeProgram)) {
             this.degreePrograms.add(degreeProgram);
         }
@@ -170,6 +171,7 @@ public class Campus {
     public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
+        //TODO arreglar
         return degreeProgram.unrollStudent(this.searchStudent(studentID));
     }
 
@@ -178,11 +180,11 @@ public class Campus {
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         Student student = this.searchStudent(studentID);
         ObjectValidator.checkStudentIsNotNull(student);
-        DegreeProgramEnrollment enrollment = this.searchEnrollment(degreeProgram, student);
+        DegreeProgramEnrollment enrollment = this.searchDegreeProgramEnrollment(degreeProgram, student);
         return enrollment.getFinishedCourses();
     }
 
-    private DegreeProgramEnrollment searchEnrollment(DegreeProgram degreeProgram, Student student) {
+    private DegreeProgramEnrollment searchDegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         //TODO usar un array
         return enrollments.stream()
                 .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram)
