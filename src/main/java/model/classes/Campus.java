@@ -15,10 +15,6 @@ public class Campus {
     private ArrayList<DegreeProgramEnrollment> enrollments;
 
     public Campus() {
-        this.initializeLists();
-    }
-
-    private void initializeLists() {
         degreePrograms = new ArrayList<>();
         professors = new ArrayList<>();
         students = new ArrayList<>();
@@ -70,9 +66,17 @@ public class Campus {
                 .orElse(null);
     }
 
+    private DegreeProgramEnrollment searchDegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
+        //TODO usar un array
+        return enrollments.stream()
+                .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram)
+                        && enrollment.getStudent().equals(student))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void addDegreeProgram(DegreeProgram degreeProgram) {
-        //TODO handlear casos en los que sea nulo
-        // o bien preguntar directamente si es null para no hacer pasamanos
+        //TODO handlear casos en los que sea nulo o bien preguntar directamente si es null para no hacer pasamanos
         if (ObjectValidator.isNotNull(degreeProgram)) {
             this.degreePrograms.add(degreeProgram);
         }
@@ -132,6 +136,16 @@ public class Campus {
         return branches.removeIf(branch -> branch.getCode().equals(code));
     }
 
+    public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
+        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
+        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
+        Student student = this.searchStudent(studentID);
+        ObjectValidator.checkStudentIsNotNull(student);
+        this.searchDegreeProgramEnrollment(degreeProgram, student).unrollStudent();
+        return true;
+
+    }
+
     public boolean addCourseToDegreeProgram(String courseCode, String programCode) {
         Course course = this.searchCourse(courseCode);
         ObjectValidator.checkCourseIsNotNull(course);
@@ -159,20 +173,19 @@ public class Campus {
         return true;
     }
 
-    public boolean enrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
+    public boolean enrollStudentInDegreeProgram(String branchCode, String studentID, String degreeProgramCode) {
+        Branch branch = this.searchBranch(branchCode);
+        ObjectValidator.checkBranchIsNotNull(branch);
         Student student = this.searchStudent(studentID);
         ObjectValidator.checkStudentIsNotNull(student);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
-        this.enrollments.add(new DegreeProgramEnrollment(degreeProgram, student));
+        this.enrollments.add(new DegreeProgramEnrollment(branch, degreeProgram, student));
         return true;
     }
 
     public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
-        DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
-        ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
-        //TODO arreglar
-        return degreeProgram.unrollStudent(this.searchStudent(studentID));
+        return this.enrollments.remove(this.searchDegreeProgramEnrollment());
     }
 
     public ArrayList<Course> getFinishedCoursesOf(String degreeProgramCode, String studentID) {
@@ -180,23 +193,17 @@ public class Campus {
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
         Student student = this.searchStudent(studentID);
         ObjectValidator.checkStudentIsNotNull(student);
-        DegreeProgramEnrollment enrollment = this.searchDegreeProgramEnrollment(degreeProgram, student);
-        return enrollment.getFinishedCourses();
+        DegreeProgramEnrollment degreeProgramEnrollment = this.searchDegreeProgramEnrollment(degreeProgram, student);
+        return degreeProgramEnrollment.getFinishedCourses();
     }
 
-    private DegreeProgramEnrollment searchDegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
-        //TODO usar un array
-        return enrollments.stream()
-                .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram)
-                        && enrollment.getStudent().equals(student))
-                .findFirst()
-                .orElse(null);
-    }
+
 
 
     public void searchAllStudentsEnrollments(String studentID) {
         //TODO sobrecargar para poder buscar por número de inscripción
         //devolver List
     }
+
 
 }
