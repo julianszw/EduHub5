@@ -1,10 +1,9 @@
 package enrollments;
 
-import auxiliar.classes.SchoolPeriodGenerator;
 import enums.CourseEnrollmentStatus;
 import enums.StudentStatus;
 import model.classes.*;
-import validators.ObjectValidator;
+
 import java.util.ArrayList;
 
 public class DegreeProgramEnrollment {

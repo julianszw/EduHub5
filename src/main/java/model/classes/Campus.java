@@ -1,7 +1,6 @@
 package model.classes;
 
 import enrollments.DegreeProgramEnrollment;
-import validators.ObjectValidator;
 
 import java.util.ArrayList;
 
