@@ -10,12 +10,10 @@ import java.util.ArrayList;
 public class DegreeProgramEnrollment {
     private Student student;
     private DegreeProgram degreeProgram;
-    private Branch branch;
     private StudentStatus studentStatus;
     private ArrayList<CourseEnrollment> courseEnrollments;
 
-    public DegreeProgramEnrollment(Branch branch, DegreeProgram degreeProgram, Student student) {
-        this.branch = branch;
+    public DegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         this.degreeProgram = degreeProgram;
         this.student = student;
         this.studentStatus = StudentStatus.ENROLLED;
@@ -30,11 +28,11 @@ public class DegreeProgramEnrollment {
         return degreeProgram;
     }
 
-    public void enrollStudentInCourse(String courseCode, Branch branch) {
+    public void enrollStudentInCourse(String courseCode) {
         Course course = degreeProgram.searchCourse(courseCode);
         ObjectValidator.checkCourseIsNotNull(course);
           //TODO estoy pasando null en Professor, resolver responsabilidades
-        this.courseEnrollments.add(new CourseEnrollment(course, branch, null));
+        this.courseEnrollments.add(new CourseEnrollment(course, null));
     }
 
         public ArrayList<Course> getFinishedCourses() {

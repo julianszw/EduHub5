@@ -11,7 +11,6 @@ public class Campus {
     private ArrayList<Student> students;
     private ArrayList<Employee> employees;
     private ArrayList<Course> courses;
-    private ArrayList<Branch> branches;
     private ArrayList<DegreeProgramEnrollment> enrollments;
 
     public Campus() {
@@ -20,7 +19,6 @@ public class Campus {
         students = new ArrayList<>();
         employees = new ArrayList<>();
         courses = new ArrayList<>();
-        branches = new ArrayList<>();
         enrollments = new ArrayList<>();
     }
 
@@ -59,12 +57,6 @@ public class Campus {
                 .orElse(null);
     }
 
-    public Branch searchBranch(String code) {
-        return branches.stream()
-                .filter(branch -> branch.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
-    }
 
     private DegreeProgramEnrollment searchDegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         //TODO usar un array
@@ -106,12 +98,6 @@ public class Campus {
         }
     }
 
-    public void addBranch(Branch branch) {
-        if (ObjectValidator.isNotNull(branch)) {
-            branches.add(branch);
-        }
-    }
-
     public boolean removeDegreeProgram(String code) {
         return this.degreePrograms.removeIf(program -> program.getProgramCode().equals(code));
     }
@@ -130,10 +116,6 @@ public class Campus {
 
     public boolean removeCourse(String code) {
         return courses.removeIf(course -> course.getCode().equals(code));
-    }
-
-    public boolean removeBranch(String code) {
-        return branches.removeIf(branch -> branch.getCode().equals(code));
     }
 
     public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
@@ -155,12 +137,9 @@ public class Campus {
         return true;
     }
 
-    public boolean addDegreeProgramToBranch(String branchCode, String degreeProgramCode) {
-        Branch branch = this.searchBranch(branchCode);
-        ObjectValidator.checkBranchIsNotNull(branch);
+    public boolean addDegreeProgramToBranch(String degreeProgramCode) {
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
-        branch.addProgram(degreeProgram);
         return true;
     }
 
@@ -173,20 +152,21 @@ public class Campus {
         return true;
     }
 
-    public boolean enrollStudentInDegreeProgram(String branchCode, String studentID, String degreeProgramCode) {
-        Branch branch = this.searchBranch(branchCode);
-        ObjectValidator.checkBranchIsNotNull(branch);
+    public boolean enrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
         Student student = this.searchStudent(studentID);
         ObjectValidator.checkStudentIsNotNull(student);
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
         ObjectValidator.checkDegreeProgramIsNotNull(degreeProgram);
-        this.enrollments.add(new DegreeProgramEnrollment(branch, degreeProgram, student));
+        this.enrollments.add(new DegreeProgramEnrollment(degreeProgram, student));
         return true;
     }
 
-    public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
-        return this.enrollments.remove(this.searchDegreeProgramEnrollment());
-    }
+   // public boolean unrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
+        //TODO
+        //1 - buscar enrollment
+        //2- modificar Status de alumno
+        //retornar true si encontró todo
+   // }
 
     public ArrayList<Course> getFinishedCoursesOf(String degreeProgramCode, String studentID) {
         DegreeProgram degreeProgram = this.searchDegreeProgram(degreeProgramCode);
@@ -196,9 +176,6 @@ public class Campus {
         DegreeProgramEnrollment degreeProgramEnrollment = this.searchDegreeProgramEnrollment(degreeProgram, student);
         return degreeProgramEnrollment.getFinishedCourses();
     }
-
-
-
 
     public void searchAllStudentsEnrollments(String studentID) {
         //TODO sobrecargar para poder buscar por número de inscripción

@@ -10,7 +10,6 @@ public class DegreeProgram {
 	private String programCode;
 	private Professor programDirector;
 	private ArrayList<Course> courses; //curriculum
-	private ArrayList<Branch> availableBranches;
 
 	public DegreeProgram(String name, String programCode) {
 		this.initializeLists();
@@ -20,7 +19,6 @@ public class DegreeProgram {
 
 	private void initializeLists() {
 		this.courses = new ArrayList<>();
-		this.availableBranches = new ArrayList<>();
 	}
 
 	public void setName(String name) {

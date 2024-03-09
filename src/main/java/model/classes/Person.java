@@ -18,7 +18,7 @@ public abstract class Person {
     private LocalDate birthDate;
 
     //Constructors
-    public Person(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
+    protected Person(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
         setNationality(nationality);
@@ -28,7 +28,7 @@ public abstract class Person {
         setBirthDate(birthDate);
     }
 
-    public Person(String firstName, String lastName, Country nationality, String ID, Gender gender, LocalDate birthDate) {
+    protected Person(String firstName, String lastName, Country nationality, String ID, Gender gender, LocalDate birthDate) {
         this(firstName, lastName, nationality, ID, gender, null, birthDate);
     }
 
