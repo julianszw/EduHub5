@@ -24,6 +24,41 @@ public class Campus {
     }
 
 
+    public void addDegreeProgram(DegreeProgram degreeProgram) {
+        if (Objects.nonNull(degreeProgram)) {
+            this.degreePrograms.add(degreeProgram);
+        }
+    }
+
+
+    public void addProfessor(Professor professor) {
+        if (Objects.nonNull(professor)) {
+            professors.add(professor);
+        }
+    }
+
+
+    public void addStudent(Student student) {
+        if (Objects.nonNull(student)) {
+            students.add(student);
+        }
+    }
+
+
+    public void addEmployee(Employee employee) {
+        if (Objects.nonNull(employee)) {
+            employees.add(employee);
+        }
+    }
+
+
+    public void addCourse(Course course) {
+        if (Objects.nonNull(course)) {
+            courses.add(course);
+        }
+    }
+
+
     public Optional<DegreeProgram> findDegreeProgramByCode(String searchedProgramCode) {
         return degreePrograms.stream()
                 .filter(program -> program.getProgramCode().equals(searchedProgramCode))
@@ -66,41 +101,6 @@ public class Campus {
     }
 
 
-    public void addDegreeProgram(DegreeProgram degreeProgram) {
-        if (Objects.nonNull(degreeProgram)) {
-            this.degreePrograms.add(degreeProgram);
-        }
-    }
-
-
-    public void addProfessor(Professor professor) {
-        if (Objects.nonNull(professor)) {
-            professors.add(professor);
-        }
-    }
-
-
-    public void addStudent(Student student) {
-        if (Objects.nonNull(student)) {
-            students.add(student);
-        }
-    }
-
-
-    public void addEmployee(Employee employee) {
-        if (Objects.nonNull(employee)) {
-            employees.add(employee);
-        }
-    }
-
-
-    public void addCourse(Course course) {
-        if (Objects.nonNull(course)) {
-            courses.add(course);
-        }
-    }
-
-
     public boolean removeDegreeProgram(String code) {
         return this.degreePrograms.removeIf(program -> program.getProgramCode().equals(code));
     }
@@ -124,6 +124,7 @@ public class Campus {
     public boolean removeCourse(String code) {
         return courses.removeIf(course -> course.getCode().equals(code));
     }
+
 
     public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
         DegreeProgram degreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
