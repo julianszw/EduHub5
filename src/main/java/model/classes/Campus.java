@@ -54,14 +54,10 @@ public class Campus {
     }
 
 
-    private DegreeProgramEnrollment findEnrollment(DegreeProgram degreeProgram, Student student) {
-        //array?
-        for (DegreeProgramEnrollment enrollment : enrollments) {
-            if (enrollment.getDegreeProgram().equals(degreeProgram) && enrollment.getStudent().equals(student)) {
-                return enrollment;
-            }
-        }
-        return null;
+    private Optional<DegreeProgramEnrollment> findEnrollment(DegreeProgram degreeProgram, Student student) {
+        return enrollments.stream()
+                .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram) && enrollment.getStudent().equals(student))
+                .findFirst();
     }
 
 
@@ -122,7 +118,7 @@ public class Campus {
         checkIsNull(studentOptional);
         DegreeProgram degreeProgram = degreeProgramOptional.get();
         Student student = studentOptional.get();
-        this.findEnrollment(degreeProgram, student).unrollStudent();
+        this.findEnrollment(degreeProgram, student).get().unrollStudent();
         return true;
     }
 
@@ -138,13 +134,6 @@ public class Campus {
         return true;
     }
 
-
-    public boolean addDegreeProgramToBranch(String degreeProgramCode) {
-        Optional<DegreeProgram> degreeProgramOptional = this.findDegreeProgramByCode(degreeProgramCode);
-        checkIsNull(degreeProgramOptional);
-        DegreeProgram degreeProgram = degreeProgramOptional.get();
-        return true;
-    }
 
     public boolean setProgramDirectorToDegreeProgram(String professorID, String degreeProgramCode) {
         Optional<Professor> programDirectorOptional = this.findProfessorByID(professorID);
