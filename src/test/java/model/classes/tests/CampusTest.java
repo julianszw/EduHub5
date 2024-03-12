@@ -46,7 +46,7 @@ public class CampusTest {
     @Test
     public void testAddDegreeProgram() {
         campus.addDegreeProgram(analisisDeSistemas);
-        assertNotNull(campus.searchDegreeProgram("ASI"));
+        assertNotNull(campus.findDegreeProgramByCode("ASI"));
     }
 
     @Test
@@ -61,9 +61,9 @@ public class CampusTest {
     @Test
     public void testRemoveDegreeProgram() {
         campus.addDegreeProgram(biologiaMarina);
-        assertNotNull(campus.searchDegreeProgram("BIM"));
+        assertNotNull(campus.findDegreeProgramByCode("BIM"));
         campus.removeDegreeProgram("BIM");
-        assertNull(campus.searchDegreeProgram("BIM"));
+        assertNull(campus.findDegreeProgramByCode("BIM"));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CampusTest {
     @Test
     public void testAddProfessor() {
         campus.addProfessor(hanzoHattori);
-        assertNotNull(campus.searchProfessor("12345678"));
+        assertNotNull(campus.findProfessorByID("12345678"));
     }
 
     @Test
@@ -92,30 +92,30 @@ public class CampusTest {
         campus.addProfessor(sofiaCoppola);
         campus.addProfessor(gasparNoe);
         campus.addProfessor(scarlettJohansson);
-        assertNotNull(campus.searchProfessor("12345678"));
-        assertNotNull(campus.searchProfessor("23456789"));
-        assertNotNull(campus.searchProfessor("34567890"));
-        assertNotNull(campus.searchProfessor("45678901"));
-        assertNotNull(campus.searchProfessor("56789012"));
+        assertNotNull(campus.findProfessorByID("12345678"));
+        assertNotNull(campus.findProfessorByID("23456789"));
+        assertNotNull(campus.findProfessorByID("34567890"));
+        assertNotNull(campus.findProfessorByID("45678901"));
+        assertNotNull(campus.findProfessorByID("56789012"));
         assertEquals(5, campus.getProfessors().size());
     }
 
     @Test
     public void testShouldNotFindNotAddedProfessors() {
-        assertNull(campus.searchProfessor("99999999"));
-        assertNull(campus.searchProfessor("99999998"));
+        assertNull(campus.findProfessorByID("99999999"));
+        assertNull(campus.findProfessorByID("99999998"));
     }
 
     @Test
     public void testAddStudent() {
         campus.addStudent(lukeSkywalker);
-        assertNotNull(campus.searchStudent("55555555"));
+        assertNotNull(campus.findStudentByID("55555555"));
     }
 
     @Test
     public void testAddCourse() {
         campus.addCourse(new Course("Matemática", "MAT"));
-        assertNotNull(campus.searchCourse("MAT"));
+        assertNotNull(campus.findCourseByCode("MAT"));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class CampusTest {
     //TODO quizá conviene agregar y borrar
     public void testDeleteDegreeProgram() {
         campus.removeDegreeProgram("ASI");
-        assertNull(campus.searchDegreeProgram("ASI"));
+        assertNull(campus.findDegreeProgramByCode("ASI"));
     }
 
 
