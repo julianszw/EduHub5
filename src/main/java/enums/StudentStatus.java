@@ -1,7 +1,7 @@
 package enums;
 
 public enum StudentStatus {
-	ENROLLED, 			//Cursando
+	ENROLLED, 			//Cursando al menos una carrera
 	GRADUATED,			//Graduado, ya terminó
 	TRANSFERRED, 		//Se pasó a otra institución
 	PENDING_GRADUATION, //Completó sus cursadas pero tiene exámenes finales pendientes

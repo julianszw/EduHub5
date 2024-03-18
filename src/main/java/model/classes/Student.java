@@ -5,9 +5,8 @@ import enums.Gender;
 import enums.StudentStatus;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-public class Student extends Person {
+public class Student extends User {
 	private static int enrollmentNumber;
 
 	private int enrollmentCode;

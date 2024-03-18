@@ -3,7 +3,6 @@ package model.classes;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class Campus {
     private final ArrayList<DegreeProgram> degreePrograms;
@@ -20,10 +19,11 @@ public class Campus {
         courses = new ArrayList<>();
     }
 
-    public static Professor findProfessorForCourse(DegreeProgram degreeProgram, String courseCode) {
+/* De la lista de profesores de la institución, se deben ofrecer los habilitados para una materia
+public static Professor findProfessorForCourse(DegreeProgram degreeProgram, String courseCode) {
         Optional<Course> courseOptional = degreeProgram.findCourseByCode(courseCode);
         return
-    }
+    }*/
 
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
@@ -144,10 +144,10 @@ public class Campus {
       return true;
     }
 
-    public boolean unenrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
+    public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
         DegreeProgram foundDegreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
         Student foundedStudent = this.findStudentByID(studentID).orElseThrow();
-        foundDegreeProgram.unenrollStudent(foundedStudent);
+        foundDegreeProgram.unrollStudent(foundedStudent);
         return true;
     }
 

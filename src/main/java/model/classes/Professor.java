@@ -6,7 +6,7 @@ import enums.Gender;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Professor extends Person{
+public class Professor extends User {
 	private LocalDate hireDate;
 	private ArrayList<Course> enabledCourses; //TODO borrar
 

@@ -3,7 +3,6 @@ package model.classes;
 import validators.TextValidator;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Optional;
 
 public class DegreeProgram {
@@ -78,7 +77,7 @@ public class DegreeProgram {
 		return enrolledStudents.add(student);
 	}
 
-	public boolean unenrollStudent(Student student) {
+	public boolean unrollStudent(Student student) {
 		if (findEnrolledStudent(student).isEmpty()) {
 			throw new IllegalArgumentException("El estudiante no existe");
 		}

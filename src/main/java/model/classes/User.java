@@ -8,7 +8,7 @@ import validators.TextValidator;
 
 import java.time.LocalDate;
 
-public abstract class Person {
+public abstract class User {
     private String firstName;
     private String lastName;
     private String ID;
@@ -18,7 +18,7 @@ public abstract class Person {
     private LocalDate birthDate;
 
     //Constructors
-    protected Person(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
+    protected User(String firstName, String lastName, Country nationality, String ID, Gender gender, String email, LocalDate birthDate) {
         setFirstName(firstName);
         setLastName(lastName);
         setNationality(nationality);
@@ -28,7 +28,7 @@ public abstract class Person {
         setBirthDate(birthDate);
     }
 
-    protected Person(String firstName, String lastName, Country nationality, String ID, Gender gender, LocalDate birthDate) {
+    protected User(String firstName, String lastName, Country nationality, String ID, Gender gender, LocalDate birthDate) {
         this(firstName, lastName, nationality, ID, gender, null, birthDate);
     }
 
