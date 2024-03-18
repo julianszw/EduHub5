@@ -23,6 +23,11 @@ public class Campus {
         enrollments = new ArrayList<>();
     }
 
+    public static Professor findProfessorForCourse(DegreeProgram degreeProgram, String courseCode) {
+        Optional<Course> courseOptional = degreeProgram.findCourseByCode(courseCode);
+        return
+    }
+
 
     public void addDegreeProgram(DegreeProgram degreeProgram) {
         if (Objects.nonNull(degreeProgram)) {
@@ -94,7 +99,7 @@ public class Campus {
     }
 
 
-    private Optional<DegreeProgramEnrollment> findEnrollment(DegreeProgram degreeProgram, Student student) {
+    private Optional<DegreeProgramEnrollment> findEnrollmentByDegreeProgramAndByStudent(DegreeProgram degreeProgram, Student student) {
         return enrollments.stream()
                 .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram) && enrollment.getStudent().equals(student))
                 .findFirst();
@@ -129,7 +134,7 @@ public class Campus {
     public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
         DegreeProgram degreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
         Student student = this.findStudentByID(studentID).orElseThrow();
-        this.findEnrollment(degreeProgram, student).orElseThrow().unrollStudent();
+        this.findEnrollmentByDegreeProgramAndByStudent(degreeProgram, student).orElseThrow().unrollStudent();
         return true;
     }
 

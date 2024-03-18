@@ -43,7 +43,7 @@ public abstract class Person {
     }
 
     public void setLastName(String lastName) {
-        if (TextValidator.isValidLastName(lastName)) {
+        if (TextValidator.isValidName(lastName)) {
             this.lastName = lastName;
         } else {
             throw new IllegalArgumentException(firstName + " no es un apellido válido");
@@ -78,8 +78,6 @@ public abstract class Person {
         }
     }
 
-
-    //Getters
     public String getFirstName() {
         return firstName;
     }

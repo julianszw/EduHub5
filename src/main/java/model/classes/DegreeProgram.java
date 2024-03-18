@@ -2,8 +2,8 @@ package model.classes;
 
 import validators.TextValidator;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class DegreeProgram {
 	private String name;
@@ -62,11 +62,10 @@ public class DegreeProgram {
 		return this.courses;
 	}
 
-	public Course searchCourse(String courseCode) {
+	public Optional<Course> findCourseByCode(String courseCode) {
 		return courses.stream()
 				.filter(course -> course.getCode().equals(courseCode))
-				.findFirst()
-				.orElse(null); // Devuelve el curso si se encuentra, de lo contrario devuelve null
+				.findFirst();
 	}
 
 }

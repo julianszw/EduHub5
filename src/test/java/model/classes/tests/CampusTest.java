@@ -13,23 +13,32 @@ import static org.junit.Assert.*;
 
 public class CampusTest {
     Campus campus;
-    DegreeProgram analisisDeSistemas, ingenieriaElectrica, psicologia, adminEmpresas, cienciasComputacion, biologiaMarina;
+    DegreeProgram analisisDeSistemas, ingenieriaElectrica, psicologia, filosofia, cienciasComputacion, biologiaMarina;
     Professor hanzoHattori, pedroAlmodovar, sofiaCoppola, gasparNoe, scarlettJohansson;
-    Student lukeSkywalker;
+    Student lukeSkywalker, harryPotter, hermioneGranger, katnissEverdeen, frodoBaggins;
 
     @Before
     public void setUpCampus() {
         campus = new Campus();
-        lukeSkywalker = new Student("Luke", "Skywalker", Country.ALBANIA, "55555555", Gender.MALE, "luke@skywalker.com", LocalDate.of(1900, 12, 16));
     }
+
+    @Before
+    public void setUpStudents() {
+        lukeSkywalker = new Student("Luke", "Skywalker", Country.ALBANIA, "55555555", Gender.MALE, "luke@skywalker.com", LocalDate.of(1900, 12, 16));
+        harryPotter = new Student("Harry", "Potter", Country.UNITED_KINGDOM, "12345678", Gender.MALE, "harry@potter.com", LocalDate.of(1980, 7, 31));
+        hermioneGranger = new Student("Hermione", "Granger", Country.UNITED_KINGDOM, "87654321", Gender.FEMALE, "hermione@granger.com", LocalDate.of(1979, 9, 19));
+        katnissEverdeen = new Student("Katniss", "Everdeen", Country.USA, "98765432", Gender.FEMALE, "katniss@everdeen.com", LocalDate.of(1990, 5, 8));
+    }
+
+
 
     @Before
     public void setUpDegreePrograms() {
         analisisDeSistemas = new DegreeProgram("Análisis de Sistemas", "ASI");
         ingenieriaElectrica = new DegreeProgram("Ingeniería Eléctrica", "IEE");
         psicologia = new DegreeProgram("Psicología", "PSI");
-        adminEmpresas = new DegreeProgram("Administración de Empresas", "ADE");
-        cienciasComputacion = new DegreeProgram("Ciencias de la Computación", "CC");
+        filosofia = new DegreeProgram("Filosofía", "FIL");
+        cienciasComputacion = new DegreeProgram("Ciencias de la Computación", "CCO");
         biologiaMarina = new DegreeProgram("Biología Marina", "BIM");
     }
 
@@ -53,7 +62,7 @@ public class CampusTest {
     public void testAddSeveralDegreePrograms() {
         campus.addDegreeProgram(ingenieriaElectrica);
         campus.addDegreeProgram(psicologia);
-        campus.addDegreeProgram(adminEmpresas);
+        campus.addDegreeProgram(filosofia);
         campus.addDegreeProgram(cienciasComputacion);
         assertEquals(4, campus.getDegreePrograms().size());
     }

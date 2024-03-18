@@ -5,12 +5,13 @@ import enums.StudentStatus;
 import model.classes.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class DegreeProgramEnrollment {
-    private Student student;
-    private DegreeProgram degreeProgram;
+    private final Student student;
+    private final DegreeProgram degreeProgram;
     private StudentStatus studentStatus;
-    private ArrayList<CourseEnrollment> courseEnrollments;
+    private final ArrayList<CourseEnrollment> courseEnrollments;
 
     public DegreeProgramEnrollment(DegreeProgram degreeProgram, Student student) {
         this.degreeProgram = degreeProgram;
@@ -28,15 +29,15 @@ public class DegreeProgramEnrollment {
     }
 
     public void enrollStudentInCourse(String courseCode) {
-        Course course = degreeProgram.searchCourse(courseCode);
-        ObjectValidator.checkCourseIsNotNull(course);
-          //TODO estoy pasando null en Professor, resolver responsabilidades
-        this.courseEnrollments.add(new CourseEnrollment(course, null));
+        Optional<Course> courseOptional = degreeProgram.findCourseByCode(courseCode);
+        courseOptional.ifPresent(course -> {
+            this.courseEnrollments.add(new CourseEnrollment(course, Campus.findProfessorForCourse(degreeProgram, courseCode)));
+        });
     }
 
-        public ArrayList<Course> getFinishedCourses() {
+    public ArrayList<Course> getFinishedCourses() {
         ArrayList<Course> finishedCourses = new ArrayList<>();
-        for (CourseEnrollment courseEnrollment: courseEnrollments) {
+        for (CourseEnrollment courseEnrollment : courseEnrollments) {
             if (courseEnrollment.getCourseEnrollmentStatus().equals(CourseEnrollmentStatus.FINALIZADO)) {
                 finishedCourses.add(courseEnrollment.getCourse());
             }
