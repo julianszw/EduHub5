@@ -1,10 +1,9 @@
 package model.classes;
 
-import enrollments.DegreeProgramEnrollment;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class Campus {
     private final ArrayList<DegreeProgram> degreePrograms;
@@ -12,7 +11,6 @@ public class Campus {
     private final ArrayList<Student> students;
     private final ArrayList<Employee> employees;
     private final ArrayList<Course> courses;
-    private final ArrayList<DegreeProgramEnrollment> enrollments;
 
     public Campus() {
         degreePrograms = new ArrayList<>();
@@ -20,7 +18,6 @@ public class Campus {
         students = new ArrayList<>();
         employees = new ArrayList<>();
         courses = new ArrayList<>();
-        enrollments = new ArrayList<>();
     }
 
     public static Professor findProfessorForCourse(DegreeProgram degreeProgram, String courseCode) {
@@ -99,13 +96,6 @@ public class Campus {
     }
 
 
-    private Optional<DegreeProgramEnrollment> findEnrollmentByDegreeProgramAndByStudent(DegreeProgram degreeProgram, Student student) {
-        return enrollments.stream()
-                .filter(enrollment -> enrollment.getDegreeProgram().equals(degreeProgram) && enrollment.getStudent().equals(student))
-                .findFirst();
-    }
-
-
     public boolean removeDegreeProgram(String code) {
         return this.degreePrograms.removeIf(program -> program.getProgramCode().equals(code));
     }
@@ -131,14 +121,6 @@ public class Campus {
     }
 
 
-    public boolean unrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
-        DegreeProgram degreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
-        Student student = this.findStudentByID(studentID).orElseThrow();
-        this.findEnrollmentByDegreeProgramAndByStudent(degreeProgram, student).orElseThrow().unrollStudent();
-        return true;
-    }
-
-
     public boolean addCourseToDegreeProgram(String courseCode, String programCode) {
         Course course = this.findCourseByCode(courseCode).orElseThrow();
         DegreeProgram degreeProgram = this.findDegreeProgramByCode(programCode).orElseThrow();
@@ -155,12 +137,24 @@ public class Campus {
     }
 
 
-    public boolean enrollStudentInDegreeProgram(String studentID, String degreeProgramCode) {
-        this.enrollments.add(new DegreeProgramEnrollment(
-                this.findDegreeProgramByCode(degreeProgramCode).orElseThrow(),
-                this.findStudentByID(studentID).orElseThrow()
-        ));
+    public boolean enrollStudentInDegreeProgram(String degreeProgramCode, String studentID) {
+      DegreeProgram foundedDegreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
+      Student foundedStudent = this.findStudentByID(studentID).orElseThrow();
+      foundedDegreeProgram.enrollStudent(foundedStudent);
+      return true;
+    }
+
+    public boolean unenrollStudentFromDegreeProgram(String degreeProgramCode, String studentID) {
+        DegreeProgram foundDegreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
+        Student foundedStudent = this.findStudentByID(studentID).orElseThrow();
+        foundDegreeProgram.unenrollStudent(foundedStudent);
         return true;
     }
 
+/*    public boolean manageStudentEnrollment(String degreeProgramCode, String studentID, Consumer<Student>action) {
+        DegreeProgram foundedDegreeProgram = this.findDegreeProgramByCode(degreeProgramCode).orElseThrow();
+        Student foundedStudent = this.findStudentByID(studentID).orElseThrow();
+        action.accept(foundedStudent);
+        return true;
+    }*/
 }
